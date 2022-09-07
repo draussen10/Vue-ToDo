@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Vue</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+	<div class="container pt-5" id = "app">
+		<div class="card">
+			<h1 :style="{
+				color: inputValue.length < 5 ? 'red' : 'blue',
+				fontSize: inputValue.length < 6 ? '3rem' : '2rem',
+			}">{{ title }}</h1>
+			<div class="form-control">
+				<input 
+					type="text" 
+					:placeholder="placeholderName"  
+					v-model="inputValue"
+					@keypress.enter="addNewTodo">
+			</div>
+			<button class="btn" @click="addNewTodo">Добавить</button>
+			<hr>
+			<ul class="list" v-if="todos.length !== 0">
+				<li class="list-item" v-for="(myTodo, index) in todos"> 
+					<span :class="myTodo.length > 9 ? 'primary' : 'bold'">{{ toUpperCase(myTodo) }} </span>
+					<button class="danger btn" @click="remoteTodo(index)">Удалить</button>
+				</li>
+				<hr>
+				<li>
+					<strong>Общее количество: {{todos.length}}</strong> | Удвоенное: {{ doubleCountComputed }}
+				</li>
+			</ul>
+			<div v-else>Todo нет. Добавьте Todo</div>
+		</div>
+	</div>
+
+	<script src="https://unpkg.com/vue@next"></script>
+	<script src="index.js"></script>
+</body>
+</html>
